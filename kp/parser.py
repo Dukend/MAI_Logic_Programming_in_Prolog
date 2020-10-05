@@ -1,4 +1,10 @@
 #!/usr/bin/python3
+# by Dukend
+# ged to pl
+#
+# father(father, child). 
+# mother(mother, child). 
+# sex(name, sex).
 fin = open( "tree.ged", "r")
 list = fin.readlines()
 fin.close()
@@ -20,7 +26,7 @@ for line in list:
         word = line.split(' ')
         name = name + ' ' + word[2].rstrip()
         person[ID]= name
-    elif ((line.find('SEX', 0, len(line)-1)!=-1)): # возможно добавление факта пол бесполезно, но пусть пока будет
+    elif ((line.find('SEX', 0, len(line)-1)!=-1)):
         word = line.split(' ')
         sex.append([name, word[2].rstrip()])
 
@@ -41,10 +47,12 @@ for line in list:
         parents.append([husb, wife, person[word[2].rstrip()]])
 
 
-fout = open("tree.pl", "w")
+fout = open("res.pl", "w")
 for i in parents:
-	fout.write('father({}, {}).\nmother({}, {}).\n'.format(
-	i[0],i[2],i[1],i[2]))
+	fout.write('father(\'{}\', \'{}\').\n'.format(i[0],i[2]))
+for i in parents:
+	fout.write('mother(\'{}\', \'{}\').\n'.format(i[1],i[2]))
+
 for i in sex:
-	fout.write('sex({}, {}).\n'.format(i[0],i[1]))
+	fout.write('sex(\'{}\', \'{}\').\n'.format(i[0],i[1]))
 fout.close()
