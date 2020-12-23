@@ -13,7 +13,9 @@ person = {}
 ID = ""
 name = ""
 sex = []
-
+parents = []
+husb = ""
+wife = ""
 
 for line in list:
     if(line.find('INDI', 0, len(line)-1)!=-1):
@@ -25,15 +27,10 @@ for line in list:
     elif ((line.find('SURN', 0, len(line)-1)!=-1)):
         word = line.split(' ')
         name = name + ' ' + word[2].rstrip()
-        person[ID]= name
+        person[ID] = name
     elif ((line.find('SEX', 0, len(line)-1)!=-1)):
         word = line.split(' ')
         sex.append([name, word[2].rstrip()])
-
-
-parents = []
-husb = ""
-wife = ""
 
 for line in list:
     if(line.find('HUSB', 0, len(line)-1)!=-1):
@@ -47,7 +44,7 @@ for line in list:
         parents.append([husb, wife, person[word[2].rstrip()]])
 
 
-fout = open("res.pl", "w")
+fout = open("data.pl", "w")
 for i in parents:
 	fout.write('father(\'{}\', \'{}\').\n'.format(i[0],i[2]))
 for i in parents:
