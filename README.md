@@ -1,2 +1,3 @@
-# LP
-Лабораторные работы по логическому программированию
+# MAI Logic Programming LAB
+Logic Programming Labs 
+
